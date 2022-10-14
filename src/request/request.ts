@@ -22,6 +22,12 @@ const Request = ({
   },
   loading = true
 }: AxiosConfig) => {
+  if (localStorage.getItem('token')) {
+    Object.assign(headers, {
+      token: localStorage.getItem('token')
+    })
+  }
+
   if (loading) {
     store.commit('loading/showLoading')
   }

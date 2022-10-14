@@ -33,9 +33,11 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import LoginAPI from '@/request/api/login'
 
+const store = useStore()
 const router = useRouter()
 
 interface FormState {
@@ -52,6 +54,8 @@ const onFinish = (values: any) => {
   console.log('Success:', values)
 
   LoginAPI.postLogin(values).then((res) => {
+    store.commit('user/setToken', res.token)
+    store.commit('user/setUserInfo', res.userInfo)
     router.push('/')
   })
   // axios({
