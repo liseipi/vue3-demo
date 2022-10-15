@@ -1,6 +1,9 @@
 import base from './base'
 import axios, { AxiosRequestConfig } from 'axios'
-import store from '@/store'
+import { useLoadingStore, useUserStore } from '@/store'
+
+const storeLoading = useLoadingStore()
+const storeUser = useUserStore()
 
 const instance = axios.create({
   timeout: base.timeout
@@ -24,12 +27,12 @@ const Request = ({
 }: AxiosConfig) => {
   if (localStorage.getItem('token')) {
     Object.assign(headers, {
-      token: localStorage.getItem('token')
+      token: storeUser.token
     })
   }
 
   if (loading) {
-    store.commit('loading/showLoading')
+    storeLoading.showLoading()
   }
 
   return new Promise((resolve, reject) => {
@@ -40,11 +43,11 @@ const Request = ({
       headers
     })
       .then((res) => {
-        store.commit('loading/hideLoading')
+        storeLoading.hideLoading()
         resolve(res.data.data)
       })
       .catch((err) => {
-        store.commit('loading/hideLoading')
+        storeLoading.hideLoading()
         reject(err)
       })
   })

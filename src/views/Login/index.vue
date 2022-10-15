@@ -33,12 +33,12 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store'
 import LoginAPI from '@/request/api/login'
 
-const store = useStore()
 const router = useRouter()
+const storeUser = useUserStore()
 
 interface FormState {
   username: string
@@ -50,22 +50,15 @@ const formState = reactive<FormState>({
   password: ''
 })
 
-const onFinish = (values: any) => {
+const onFinish = async (values: any) => {
   console.log('Success:', values)
 
-  LoginAPI.postLogin(values).then((res) => {
-    store.commit('user/setToken', res.token)
-    store.commit('user/setUserInfo', res.userInfo)
-    router.push('/')
-  })
-  // axios({
-  //   url: '/mock/api/login',
-  //   method: 'post',
-  //   data: values
-  // }).then((res) => {
-  //   console.log(res.data)
-  //   router.push('/')
-  // })
+  const result: any = await LoginAPI.postLogin(values)
+  if (result) {
+    storeUser.setToken(result.token)
+    storeUser.setUserInfo(result.userInfo)
+    await router.push('/')
+  }
 }
 </script>
 

@@ -1,29 +1,31 @@
-const loading = {
-  namespaced: true,
-  state: {
-    token: localStorage.getItem('token') || '',
-    userInfo: JSON.parse(localStorage.getItem('userInfo') || '{}')
-  },
-  mutations: {
-    setToken(state: any, token: string) {
-      state.token = token
-      localStorage.setItem('token', token)
-    },
-    setUserInfo(state: any, userInfo: object) {
-      state.userInfo = userInfo
-      localStorage.setItem('userInfo', JSON.stringify(userInfo))
-    },
-    clearToken(state: any) {
-      state.token = ''
-      localStorage.removeItem('token')
-    },
-    clearUserInfo(state: any) {
-      state.userInfo = {}
-      localStorage.removeItem('userInfo')
+import { defineStore } from 'pinia'
+
+export const useUserStore = defineStore('storeUser', {
+  state() {
+    return {
+      token: '',
+      userInfo: {}
     }
   },
-  actions: {},
-  modules: {}
-}
-
-export default loading
+  actions: {
+    setToken(token: string) {
+      this.token = token
+    },
+    setUserInfo(userInfo: object) {
+      this.userInfo = userInfo
+    },
+    clearToken() {
+      this.token = ''
+    },
+    clearUserInfo() {
+      this.userInfo = {}
+    }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      { key: 'token', storage: localStorage, paths: ['token'] },
+      { key: 'userInfo', storage: localStorage, paths: ['userInfo'] }
+    ]
+  }
+})

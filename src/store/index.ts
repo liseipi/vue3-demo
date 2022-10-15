@@ -1,13 +1,4 @@
-import { createStore } from 'vuex'
-import loading from './modules/loading'
-import user from './modules/user'
+import { useLoadingStore } from '@/store/modules/loading'
+import { useUserStore } from '@/store/modules/user'
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {
-    loading,
-    user
-  }
-})
+export { useLoadingStore, useUserStore }

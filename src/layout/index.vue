@@ -38,7 +38,7 @@
           minHeight: '280px'
         }"
       >
-        <a-spin :spinning="store.state.loading.loadingState" :delay="300">
+        <a-spin :spinning="storeLoading.loadingState" :delay="300">
           <router-view />
         </a-spin>
       </a-layout-content>
@@ -47,9 +47,9 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useLoadingStore } from '@/store'
 
-const store = useStore()
+const storeLoading = useLoadingStore()
 
 const selectedKeys = ref<string[]>(['1'])
 const collapsed = ref<boolean>(false)

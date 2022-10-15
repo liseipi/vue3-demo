@@ -1,18 +1,20 @@
-const loading = {
-  namespaced: true,
-  state: {
-    loadingState: false
-  },
-  mutations: {
-    showLoading(state: any) {
-      state.loadingState = true
-    },
-    hideLoading(state: any) {
-      state.loadingState = false
+import { defineStore } from 'pinia'
+
+export const useLoadingStore = defineStore('storeLoading', {
+  state: () => {
+    return {
+      loadingState: false
     }
   },
-  actions: {},
-  modules: {}
-}
-
-export default loading
+  actions: {
+    showLoading() {
+      this.loadingState = true
+    },
+    hideLoading() {
+      this.loadingState = false
+    }
+  },
+  persist: {
+    enabled: true
+  }
+})
