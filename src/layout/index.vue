@@ -16,23 +16,27 @@
         <a-menu-item key='2'>nav 2</a-menu-item>
         <a-menu-item key='3'>nav 3</a-menu-item>
       </a-menu>
-      <div class='user-setting'>
+      <div class='user-setting' style='padding-right: 20px;'>
         <a-dropdown>
-          <a class="ant-dropdown-link" @click.prevent>
-            <a-avatar>
+          <a class="ant-dropdown-link ant-avatar" @click.prevent>
+            <a-avatar class="ant-dropdown-link">
               <template #icon><UserOutlined /></template>
             </a-avatar>
           </a>
           <template #overlay>
-            <a-menu>
-              <a-menu-item>
-                <a href="javascript:;">1st menu item</a>
+            <a-menu @click.prevent>
+              <a-menu-item key="1">
+                <UserOutlined />
+                个人信息
               </a-menu-item>
-              <a-menu-item>
-                <a href="javascript:;">2nd menu item</a>
+              <a-menu-item key="2">
+                <UserOutlined />
+                2nd menu item
               </a-menu-item>
-              <a-menu-item>
-                <a href="javascript:;">3rd menu item</a>
+              <a-menu-divider />
+              <a-menu-item key="3">
+                <UserOutlined />
+                退出
               </a-menu-item>
             </a-menu>
           </template>
