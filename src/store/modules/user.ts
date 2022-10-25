@@ -4,7 +4,8 @@ export const useUserStore = defineStore('storeUser', {
   state() {
     return {
       token: '',
-      userInfo: {}
+      userInfo: {},
+      routes: []
     }
   },
   actions: {
@@ -14,11 +15,17 @@ export const useUserStore = defineStore('storeUser', {
     setUserInfo(userInfo: object) {
       this.userInfo = userInfo
     },
+    setRoutes(routes: []) {
+      this.routes = routes
+    },
     clearToken() {
       this.token = ''
     },
     clearUserInfo() {
       this.userInfo = {}
+    },
+    clearRoutes() {
+      this.routes = []
     },
     signOut() {
       this.token = ''

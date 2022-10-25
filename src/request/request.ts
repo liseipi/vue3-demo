@@ -40,6 +40,7 @@ const Request = ({
       url,
       method,
       params,
+      data,
       headers
     })
       .then((res) => {
