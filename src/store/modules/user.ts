@@ -15,7 +15,7 @@ export const useUserStore = defineStore('storeUser', {
     setUserInfo(userInfo: object) {
       this.userInfo = userInfo
     },
-    setRoutes(routes: []) {
+    setRoutes(routes: any) {
       this.routes = routes
     },
     clearToken() {
@@ -30,13 +30,15 @@ export const useUserStore = defineStore('storeUser', {
     signOut() {
       this.token = ''
       this.userInfo = {}
+      this.routes = []
     }
   },
   persist: {
     enabled: true,
     strategies: [
       { key: 'token', storage: localStorage, paths: ['token'] },
-      { key: 'userInfo', storage: localStorage, paths: ['userInfo'] }
+      { key: 'userInfo', storage: localStorage, paths: ['userInfo'] },
+      { key: 'routes', storage: localStorage, paths: ['routes'] }
     ]
   }
 })

@@ -54,9 +54,11 @@ const onFinish = async (values: any) => {
   console.log('Success:', values)
 
   const result: any = await LoginAPI.postLogin(values)
+  console.log(result)
   if (result) {
     storeUser.setToken(result.token)
     storeUser.setUserInfo(result.userInfo)
+    storeUser.setRoutes(result.routes)
     await router.push('/')
   }
 }
