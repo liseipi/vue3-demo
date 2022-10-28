@@ -19,7 +19,25 @@ const routes = [
       title: 'Login Page',
       layout: false
     }
-  }
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/Dashboard/index.vue'),
+    meta: {
+      title: 'Dashboard Page',
+      layout: true
+    }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register/index.vue'),
+    meta: {
+      title: 'Register Page',
+      layout: false
+    }
+  },
 ]
 
 const router = createRouter({

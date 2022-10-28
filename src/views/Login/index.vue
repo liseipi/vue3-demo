@@ -36,6 +36,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import LoginAPI from '@/request/api/login'
+import { addRoutes } from '@/util/asyncRoutes'
 
 const router = useRouter()
 const storeUser = useUserStore()
@@ -51,14 +52,15 @@ const formState = reactive<FormState>({
 })
 
 const onFinish = async (values: any) => {
-  console.log('Success:', values)
+  // console.log('Success:', values)
 
   const result: any = await LoginAPI.postLogin(values)
-  console.log(result)
+  // console.log(result)
   if (result) {
     storeUser.setToken(result.token)
     storeUser.setUserInfo(result.userInfo)
     storeUser.setRoutes(result.routes)
+    addRoutes(storeUser, router)
     await router.push('/')
   }
 }
