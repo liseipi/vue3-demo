@@ -35,9 +35,15 @@ const addRoutes = (storeUser: any, router: any) => {
       layout: true
     }
   })
-  console.log(router)
 }
 
-const clearRoutes = () => {}
+const clearRoutes = (storeUser: any, router: any) => {
+  if (storeUser.routes && storeUser.routes.length > 0) {
+    storeUser.routes.forEach((item: any) => {
+      router.removeRoute(item)
+    })
+    storeUser.clearRoutes()
+  }
+}
 
 export { addRoutes, clearRoutes }

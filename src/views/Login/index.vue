@@ -61,7 +61,7 @@ const onFinish = async (values: any) => {
     storeUser.setUserInfo(result.userInfo)
     storeUser.setRoutes(result.routes)
     addRoutes(storeUser, router)
-    await router.push('/')
+    await router.push('/dashboard')
   }
 }
 </script>

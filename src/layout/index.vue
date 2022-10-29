@@ -12,7 +12,9 @@
         :style="{ lineHeight: '64px', paddingLeft: '24px' }"
         class="header-menu"
       >
-        <a-menu-item key="1" @click='router.push("/dashboard")'>Dashboard</a-menu-item>
+        <a-menu-item key="1" @click="router.push('/dashboard')"
+          >Dashboard</a-menu-item
+        >
         <a-menu-item key="2">nav 2</a-menu-item>
         <a-menu-item key="3">nav 3</a-menu-item>
       </a-menu>
@@ -115,6 +117,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLoadingStore, useUserStore } from '@/store'
+import { clearRoutes } from '@/util/asyncRoutes'
 
 const router = useRouter()
 
@@ -128,6 +131,7 @@ const openKeys = ref<string[]>(['sub1'])
 
 const signOutUser = () => {
   storeUser.signOut()
+  clearRoutes(storeUser, router)
   router.push('/login')
 }
 </script>
