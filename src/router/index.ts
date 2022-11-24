@@ -13,32 +13,29 @@ const routes = [
   //   }
   // },
   {
+    path: '/',
+    name: 'home',
+    redirect: '/dashboard',
+    meta: {
+      title: 'home Page',
+      layout: false,
+      menu: false,
+      icon: '',
+      sort: 11
+    }
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/Login/index.vue'),
     meta: {
       title: 'Login Page',
-      layout: false
+      layout: false,
+      menu: false,
+      icon: '',
+      sort: 22
     }
   }
-  // {
-  //   path: '/dashboard',
-  //   name: 'dashboard',
-  //   component: () => import('../views/Dashboard/index.vue'),
-  //   meta: {
-  //     title: 'Dashboard Page',
-  //     layout: true
-  //   }
-  // },
-  // {
-  //   path: '/register',
-  //   name: 'register',
-  //   component: () => import('../views/Register/index.vue'),
-  //   meta: {
-  //     title: 'Register Page',
-  //     layout: false
-  //   }
-  // },
 ]
 
 const router = createRouter({
@@ -49,6 +46,11 @@ const router = createRouter({
 let registerRouterFresh = true
 router.beforeEach((to, from, next) => {
   const storeUser = useUserStore()
+
+  if (to.meta.title) {
+    document.title = to.meta.title as string
+  }
+
   if (to.name !== 'login' && !storeUser.token) {
     next({ path: '/login' })
   } else {

@@ -17,11 +17,7 @@ const addRoutes = (storeUser: any, router: any) => {
   if (storeUser.routes && storeUser.routes.length > 0) {
     const routesData = JSON.parse(JSON.stringify(storeUser.routes))
     const views = import.meta.glob('../views/**/*.vue')
-    // console.log(routesData)
-    // console.log(views)
     const splicingRoutesData = splicingRoutes(routesData, views)
-    // console.log(routesData)
-    // console.log(splicingRoutesData)
     splicingRoutesData.forEach((item: any) => {
       router.addRoute(item)
     })
@@ -32,7 +28,10 @@ const addRoutes = (storeUser: any, router: any) => {
     component: () => import('@/views/Error/404.vue'),
     meta: {
       title: 'Error Page',
-      layout: true
+      layout: true,
+      menu: false,
+      icon: '',
+      sort: 1
     }
   })
 }
